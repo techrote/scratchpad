@@ -1,0 +1,986 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <meta name="theme-color" content="#0a0b0c">
+  <meta name="description" content="Append-only sketch journal for the COLOURED.HTML industrial ASCII composition system.">
+  <title>╚╟x5pn ═re─═mt ── ╜s─s─═░T─W═e─</title>
+  <style>
+    :root {
+      --void: #0a0b0c;
+      --well: #111315;
+      --well-2: #17191b;
+      --paper: #e7dfca;
+      --dim: #a19e92;
+      --steel: #747a77;
+      --steel-dark: #34393a;
+      --rust: #ad4e2f;
+      --rust-hot: #dc783c;
+      --magenta: #cf57a0;
+      --violet: #71345f;
+      --cyan: #53bfba;
+      --yellow: #d4b13d;
+      --page: 78rem;
+      font-synthesis: none;
+    }
+
+    * { box-sizing: border-box; }
+
+    html {
+      scroll-behavior: smooth;
+      background: var(--void);
+    }
+
+    body {
+      min-width: 18rem;
+      margin: 0;
+      color: var(--paper);
+      background: var(--void);
+      font-family: "Cascadia Mono", "IBM Plex Mono", "Courier New", monospace;
+      line-height: 1.55;
+    }
+
+    a { color: inherit; }
+
+    a:focus-visible {
+      outline: 2px solid var(--cyan);
+      outline-offset: 4px;
+    }
+
+    ::selection {
+      color: var(--void);
+      background: var(--yellow);
+    }
+
+    .page {
+      width: min(calc(100% - 2rem), var(--page));
+      margin-inline: auto;
+    }
+
+    .site-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      min-height: 5rem;
+      border-bottom: 1px solid var(--steel-dark);
+    }
+
+    .site-header a {
+      text-decoration: none;
+    }
+
+    .wordmark {
+      font-size: .78rem;
+      font-weight: 700;
+      letter-spacing: .12em;
+    }
+
+    .wordmark span { color: var(--magenta); }
+
+    .top-nav {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+      gap: .5rem 1rem;
+      color: var(--dim);
+      font-size: .68rem;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+
+    .top-nav a:hover { color: var(--cyan); }
+
+    main { padding-bottom: 6rem; }
+
+    .journal-hero {
+      display: grid;
+      grid-template-columns: minmax(0, 1.2fr) minmax(17rem, .8fr);
+      gap: clamp(2rem, 7vw, 6rem);
+      align-items: end;
+      padding: clamp(4rem, 10vw, 8rem) 0 clamp(3rem, 8vw, 6rem);
+      border-bottom: 1px solid var(--steel-dark);
+    }
+
+    .kicker,
+    .attempt-id,
+    .meta,
+    .label,
+    .toc a,
+    .module-card h3,
+    .palette-card h3 {
+      font-size: .7rem;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+    }
+
+    .kicker,
+    .attempt-id,
+    .label { color: var(--magenta); }
+
+    h1,
+    h2,
+    h3,
+    p { text-wrap: pretty; }
+
+    h1 {
+      max-width: 11ch;
+      margin: .6rem 0 1.4rem;
+      font-size: clamp(3rem, 10vw, 7.6rem);
+      line-height: .83;
+      letter-spacing: -.08em;
+      text-transform: uppercase;
+    }
+
+    .intro {
+      max-width: 58ch;
+      margin: 0;
+      color: var(--dim);
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(1rem, 2vw, 1.2rem);
+    }
+
+    .protocol {
+      padding: 1.3rem;
+      color: var(--dim);
+      background: var(--well);
+      border: 1px solid var(--rust);
+    }
+
+    .protocol pre {
+      margin: 0 0 1rem;
+      overflow: hidden;
+      color: var(--rust-hot);
+      font-size: .68rem;
+      white-space: pre;
+    }
+
+    .protocol strong { color: var(--paper); }
+
+    .protocol p:last-child { margin-bottom: 0; }
+
+    .toc {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1px;
+      margin: 2rem 0 0;
+      padding: 1px;
+      background: var(--steel-dark);
+    }
+
+    .toc a {
+      display: block;
+      min-height: 4.4rem;
+      padding: .9rem;
+      color: var(--dim);
+      background: var(--void);
+      text-decoration: none;
+    }
+
+    .toc a:hover {
+      color: var(--void);
+      background: var(--cyan);
+    }
+
+    .section-head {
+      margin: clamp(5rem, 11vw, 9rem) 0 2rem;
+      border-bottom: 1px solid var(--steel-dark);
+    }
+
+    .section-head h2 {
+      margin: .35rem 0 1rem;
+      font-size: clamp(2rem, 6vw, 4.8rem);
+      line-height: .92;
+      letter-spacing: -.06em;
+      text-transform: uppercase;
+    }
+
+    .section-head p:last-child {
+      max-width: 65ch;
+      margin: 0 0 1.5rem;
+      color: var(--dim);
+    }
+
+    .source-map {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 1px;
+      padding: 1px;
+      background: var(--steel-dark);
+    }
+
+    .source-note {
+      min-height: 12rem;
+      padding: 1.25rem;
+      background: var(--well);
+    }
+
+    .source-note h3 {
+      margin: 0 0 .7rem;
+      color: var(--paper);
+      font-size: 1rem;
+      text-transform: uppercase;
+    }
+
+    .source-note p {
+      margin: .5rem 0 0;
+      color: var(--dim);
+      font-size: .82rem;
+    }
+
+    .source-note .policy {
+      display: inline-block;
+      padding: .25rem .4rem;
+      color: var(--void);
+      background: var(--yellow);
+      font-size: .62rem;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+
+    .source-note .policy.inspiration {
+      color: var(--paper);
+      background: var(--violet);
+    }
+
+    .attempts {
+      display: grid;
+      gap: 3rem;
+    }
+
+    .attempt {
+      padding: clamp(1rem, 3vw, 2rem);
+      background: var(--well);
+      border: 1px solid var(--steel-dark);
+    }
+
+    .attempt header {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(13rem, .55fr);
+      gap: 1rem;
+      align-items: end;
+      margin-bottom: 1.5rem;
+    }
+
+    .attempt h3 {
+      margin: .25rem 0 0;
+      font-size: clamp(1.5rem, 4vw, 3rem);
+      line-height: 1;
+      letter-spacing: -.045em;
+      text-transform: uppercase;
+    }
+
+    .meta {
+      margin: 0;
+      color: var(--dim);
+      text-align: right;
+    }
+
+    .sketch-window {
+      overflow-x: auto;
+      color: var(--sketch-paper, var(--paper));
+      background: var(--sketch-well, #090a0b);
+      border: 1px solid var(--sketch-frame, var(--steel));
+      scrollbar-color: var(--rust) var(--void);
+    }
+
+    .sketch-window pre {
+      width: max-content;
+      min-width: 100%;
+      margin: 0;
+      padding: 1rem;
+      color: var(--sketch-frame, var(--steel));
+      font-size: clamp(.62rem, 1.25vw, .78rem);
+      font-weight: 700;
+      line-height: 1.2;
+      white-space: pre;
+    }
+
+    .sketch-window .s-rust { color: var(--sketch-rust, var(--rust)); }
+    .sketch-window .s-signal { color: var(--sketch-signal, var(--cyan)); }
+    .sketch-window .s-light { color: var(--sketch-paper, var(--paper)); }
+    .sketch-window .s-dim { color: var(--sketch-dim, var(--steel-dark)); }
+
+    .evaluation {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+      margin-top: 1.5rem;
+    }
+
+    .evaluation h4 {
+      margin: 0 0 .45rem;
+      color: var(--rust-hot);
+      font-size: .7rem;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+    }
+
+    .evaluation p {
+      margin: 0;
+      color: var(--dim);
+      font-size: .84rem;
+    }
+
+    .oxide {
+      --sketch-well: #100c0a;
+      --sketch-frame: #8c8373;
+      --sketch-rust: #d16c39;
+      --sketch-signal: #d6b23f;
+      --sketch-paper: #e7dac0;
+      --sketch-dim: #5f3528;
+    }
+
+    .cold {
+      --sketch-well: #081114;
+      --sketch-frame: #70898a;
+      --sketch-rust: #9e5237;
+      --sketch-signal: #58c8c2;
+      --sketch-paper: #dce9e1;
+      --sketch-dim: #254d50;
+    }
+
+    .bruise {
+      --sketch-well: #120b12;
+      --sketch-frame: #c858a0;
+      --sketch-rust: #bb6039;
+      --sketch-signal: #58c3bd;
+      --sketch-paper: #e7dac6;
+      --sketch-dim: #613052;
+    }
+
+    .ghost {
+      --sketch-well: #0d0f10;
+      --sketch-frame: #89908c;
+      --sketch-rust: #9f472d;
+      --sketch-signal: #d5c35c;
+      --sketch-paper: #deded2;
+      --sketch-dim: #343a3b;
+    }
+
+    .module-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1px;
+      padding: 1px;
+      background: var(--steel-dark);
+    }
+
+    .module-card {
+      min-width: 0;
+      padding: 1rem;
+      background: var(--well);
+    }
+
+    .module-card h3 {
+      margin: 0 0 .75rem;
+      color: var(--cyan);
+    }
+
+    .module-card pre {
+      margin: 0;
+      overflow-x: auto;
+      color: var(--steel);
+      font-size: .7rem;
+      line-height: 1.18;
+      white-space: pre;
+    }
+
+    .module-card p {
+      margin: .9rem 0 0;
+      color: var(--dim);
+      font-size: .76rem;
+    }
+
+    .palette-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 1rem;
+    }
+
+    .palette-card {
+      padding: 1rem;
+      background: var(--well);
+      border: 1px solid var(--steel-dark);
+    }
+
+    .palette-card h3 {
+      margin: 0 0 .85rem;
+      color: var(--paper);
+    }
+
+    .palette-card pre {
+      margin: 0;
+      padding: .8rem;
+      overflow: hidden;
+      color: var(--sketch-frame);
+      background: var(--sketch-well);
+      font-size: .66rem;
+      line-height: 1.15;
+      white-space: pre;
+    }
+
+    .swatches {
+      display: grid;
+      gap: .4rem;
+      margin-top: .8rem;
+      color: var(--dim);
+      font-size: .68rem;
+    }
+
+    .swatches span::before {
+      display: inline-block;
+      width: 2.2rem;
+      margin-right: .55rem;
+      color: var(--swatch);
+      content: "████";
+    }
+
+    .decision-log {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      border-top: 1px solid var(--steel-dark);
+    }
+
+    .decision-log li {
+      display: grid;
+      grid-template-columns: 8rem minmax(0, 1fr);
+      gap: 1rem;
+      padding: 1rem 0;
+      color: var(--dim);
+      border-bottom: 1px solid var(--steel-dark);
+    }
+
+    .decision-log strong {
+      color: var(--magenta);
+      font-size: .7rem;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+    }
+
+    footer {
+      padding: 2rem 0 3rem;
+      color: var(--dim);
+      border-top: 1px solid var(--steel-dark);
+      font-size: .7rem;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+
+    @media (max-width: 52rem) {
+      .page { width: min(calc(100% - 1rem), var(--page)); }
+      .journal-hero { grid-template-columns: 1fr; }
+      .toc { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .attempt header { grid-template-columns: 1fr; }
+      .meta { text-align: left; }
+      .module-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .palette-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+
+    @media (max-width: 34rem) {
+      .site-header { align-items: flex-start; padding-block: 1rem; }
+      .top-nav { max-width: 12rem; }
+      .top-nav a:not(:first-child) { display: none; }
+      .source-map,
+      .evaluation,
+      .module-grid,
+      .palette-grid { grid-template-columns: 1fr; }
+      .decision-log li { grid-template-columns: 1fr; gap: .35rem; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+    }
+  </style>
+</head>
+<body>
+  <!--
+    APPEND-ONLY JOURNAL CONTRACT
+    Never delete or modify an existing .attempt article.
+    To revise: copy the complete article, append it after the latest attempt,
+    assign the next numeric id, and name its source in data-parent.
+    Record any change of status as a new entry in the decision log.
+  -->
+  <header class="site-header page">
+    <a class="wordmark" href="index.html"><span>aaR</span> As─s─═░T─U═e─</a>
+    <nav class="top-nav" aria-label="Journal and planning documents">
+      <a href="index.html">e Cs emel</a>
+      <a href="ansi-analysis.html">─in╨ m═m░i═▄═</a>
+      <a href="composition-plan.html">╜rger═a●ar═ etr═</a>
+      <a href="implementation-plan.html">ge▄t, etm═</a>
+    </nav>
+  </header>
+
+  <main class="page">
+    <section class="journal-hero" aria-labelledby="journal-title">
+      <div>
+        <p class="kicker">s is═iar═ eee ─ es─9m═l═║ ar─ca═e ─lpr─, e</p>
+        <h1 id="journal-title">╚╟s║pn ─re─═ct─</h1>
+        <p class="intro">─tt 0rPeri▄/ar═ c/v7╤e/i tk─▒ ns─lT ║nl eilset═ ║ny r─l─seat║═ ◉ns ─s─-pvln═ m═n ╪nl pnr═l═─ ═n- ─re─═ct ○i m ar─ca═e ╝mpn▄═y aavn ═r acw╪x 0ne/╖─</p>
+      </div>
+      <aside class="protocol">
+        <pre aria-hidden="true">noatetttatoaoooottoaottaoU
+─ a g ─ee░iTisi─═ e░es══ ─
+naaa─tttatottoataototooot─
+─ eeg prei s═sr─s pn·═e╖ ─
+─ eeg ─s║ca═ l─s─i i║c╪s ─
+─ esg ceey═n ,l0▄i▄r═w    ─
+═tta▓ttoaooaatooatottaoote</pre>
+        <p><strong>═etlT</strong> Eia═║a═e m║╥l╝e║═ r─s ═l─l─ n▒tl╪s, r─ ia░╖═/ti gyema─In─ ─ ─lar─c sxea═i c═ c 0r╝e░E╥╖ 0rei aa║n r ═la ╨T c═n │ ,xptmg6, em─N═●─</p>
+      </aside>
+    </section>
+
+    <nav class="toc" aria-label="Journal index">
+      <a href="#sources">eee ─ wr,─p8 ─rpmFet│─i</a>
+      <a href="#attempt-001">eee ─ ptcge sri</a>
+      <a href="#attempt-002">eee ─ ieta║ pr═neav</a>
+      <a href="#attempt-003">ees ─ ║aa═ ar─╟y─w</a>
+      <a href="#attempt-004">een ─ 2r─╙◉iar═ rssis5</a>
+      <a href="#attempt-005">ee─ ─ 0r══l0║sn ar─╟i</a>
+      <a href="#modules">#rne░l wnsts</a>
+      <a href="#palettes">prtre─ari■</a>
+      <a href="#decisions">nlp○ikr═ tre</a>
+    </nav>
+
+    <section id="sources" aria-labelledby="sources-title">
+      <header class="section-head">
+        <p class="label">─╣║s╤e║ eee ─ li●─c0║ar═ sxsr─y r──m═e╢P7═║</p>
+        <h2 id="sources-title">╚re─2l ─rpcsetr╙i</h2>
+        <p>═nlil rs═l──│╣ar══ ╪─█c╥ y─l─i c╥║mpnE, ─i╚╨ sat╬ ri ─a═,mt ─ssl─l═ps gr/y─▄rt r═ti─ ░9s█nn▒n tcRltw═ ─═─══ p─yna║══ m═n Pl/cnr║m r─l ═rv ○═i╥gep╥kr══─ ═ny sa═mt Cs e·el eiy═ r─ke○═ct e░ien ═║─e0ve─l═─</p>
+      </header>
+
+      <div class="source-map">
+        <article class="source-note">
+          <span class="policy">na─lp║iprei el─Pa╣v7n</span>
+          <h3>em═8tTsriT0iRE─ee═cT←cpna═s─i</h3>
+          <p>ie e ne p╖tti─ Waenis─═nel═pi Pces═v│ grpna═N─i═ r─s─░ceea═e e░·╣Ii═ R─rc▒═ ─cat══ 0cstl sr╙Ew╪i═ a═w╖◉ p│─a║ksi═ c═n c ║─c══k║▄r═ s─r╝ s─c0v,─ln smipac ║r ,y══s ─s─vaprt ═lg─ap█ sm═c═─</p>
+          <p>C═stel═2s ─l╪ma═lnT ic╥e─r║sn piss─iec═yt prtre─═ gmw═sn ─.╗eC─ ║li║e─s═ c═n e═▒─▒═ etm║l nl═ia╥i─ ir 8i│0║ s─me9I═║ amw ═lsnln a═ 5nl sa═ct emel─</p>
+        </article>
+        <article class="source-note">
+          <span class="policy">na─lp5i0rei e█─ga/v█,</span>
+          <h3>▄═n,╞║─i</h3>
+          <p>ie e si pytti─ ─ prger═s═5 ═n═█║ rs i║─,║i═ e○eIw═ pree░l─i═ nm║0n-i═ ─╖el·║a═e smw║s═s─i═ seism─w═ ─N═/ s░rpci═ m═n ╤mvs─art vs═║i─</p>
+          <p>C═stes═p▒ ─y5Ba═snT ║ns an█r rs c ─leimstl emg║■ insts c═n r nstasl─r║lti et│▄═ ╤▒jct 0rtre─ami─ ═a═ct 9r,etl═ as─▒ ─ln─ma═ s─rP ip╙G║0n─</p>
+        </article>
+        <article class="source-note">
+          <span class="policy inspiration">a═wea─c║ar═ r═ti</span>
+          <h3>─eii0nc─elera═║═ ─ ─eii╞vrpcstce</h3>
+          <p>═▒e▒│`sn pm─║ganesi═ r─l─nImn sei▒w═ tr═e ═s──a0l w║8g▀═ 0r╝ecp║ #m0na═-─i ai░c═n══ c═n t·─el ne▄s║ salt,i pr══yp║ln si ╥na═ 0r═ne▄v╞─</p>
+          <p>e─a═0▄ets ─y╪ra═▒nT nl══l lne7i r─re═n m═ 8ge║i ▄═sr─╝m╪kr═ ces─║e─l─ ░imp║ pr─║─○nes══ se═smg══ iatnreN╥╣si═ m═, isnel═p╬═ al─y ═r╣ ─se─rnep█n─</p>
+        </article>
+        <article class="source-note">
+          <span class="policy inspiration">a══ea─m╪a◉═ r═ti</span>
+          <h3>eri</h3>
+          <p>─ 0r╤ec0║ 0iss╙═l╥▄0 n═r, ,═─EtreNn ri · w╝mtt gr║○s═ c ─xe═c║▒n et│2Ig-═v i║e,i═ c═n s○═ct░i │═ ygsl,,ln ╤B0na═l saee─8─</p>
+          <p>e▒║nr, glvca═s,T y─rt─█ r═l 0nm─c0║l─ ╥n─reen w-─l─ct etmps#8═v═─ ═nl wl═║▄═l░i nl─l e═y c ═la satc/s─mt re`ta═l═ nasss─s═║ ░s══Ew═ ─ra═v══ srni═ c═n r╪vr0nPs═/ ░rek0─</p>
+        </article>
+        <article class="source-note">
+          <span class="policy inspiration">▄══ea╙cv▄r═ r═ti</span>
+          <h3>─╚i═─n═</h3>
+          <p>─sre║ ie e eee ,lprnln 0ltti rs neeI strp╟iin·,sn P│i══ cR─ee` ╥r═y pnm═ex══ nm─, eree6i═ 0tew╪I─═n ═elpct-i═ c═, ns·─i ░ras─ilne6 ─a╞ect e─m─kvi─</p>
+          <p>═l0n═kne█ ─s║│▄═lnT ─,i║ ai m nl═╞▄●i E─l═/ pr═pl═║─m║ln c/ ─ra═║i m═, ░ra snesi─ er─/╙ca║i═ t═/`═─a═e═ 0r═/re─══ c═n n▄║ny─ sast,╞ as─l ═r║ v─mp8n─</p>
+        </article>
+        <article class="source-note">
+          <span class="policy inspiration">prger═a║ar═ tca</span>
+          <h3>╜rgs○══n e─c╝Pm─</h3>
+          <p>n/ge0╪,─═ ei╢i ─hgnU═ea─n─n ─ra═║╞ eil ──es═ac─n alm─ eis═ ──1═TnT─n pr─╙r═ar═ #r─▒═ jn─reen ─.HeC─ aa║nre║ e─█║y═,k═e ║r ss enr╣re─cena0─</p>
+          <p>╜r═w╥─│k═● ─Nvra═█n l─E─iany─8T ╥nl e─r─E0║ a═sr─╤·║ar═ ═║ri═ 0s═/╖gyn m═n m║ t╖r═║ spn s─r╤ c═i c─╥ r─ Rr─nl──</p>
+        </article>
+      </div>
+    </section>
+
+    <section aria-labelledby="attempts-title">
+      <header class="section-head">
+        <p class="label">─║/ygejw eeeeee─ ─ pn─r═r░rea0mt m═n ▄#gevmJts</p>
+        <h2 id="attempts-title">──gc═elgs═5 `─▄ctw</h2>
+        <p>░│0n prPeria║ar═ a═ e─lwl──yn c═ a║ arw l─ctem║-,─ ═n- c─║ s░rp╟═ ─s]ma═ nr─○nr═/mtti ═p─rttmR░I ir ═m──ra ip─▒══i nr ═r║ ─la─a║═ r─ a─│e ║ns pnr─·p║y─═─</p>
+      </header>
+
+      <div class="attempts">
+        <article id="attempt-001" class="attempt" data-parent="none">
+          <header>
+            <div>
+              <p class="attempt-id">─║║l╤ev eee</p>
+              <h3>A░c#e sri</h3>
+            </div>
+            <p class="meta">ie e ei ─ riany ─ ecgs═`T ═r═l<br>]rnetswT 0me═ /aa═ ─rat═ i,9e</p>
+          </header>
+          <div class="sketch-window oxide" role="img" aria-label="A very regular rectangular machinery frame around centered project copy">
+            <pre>naoooetooaoootetottotooooaoottooaotootooaaotoatoaooaaoaetatattoteototL
+─<span class="s-rust">.╨ei</span>g A──ee  g<span class="s-dim">╡ffh╠f╔du[╔hdd╓d╠fdd╫╡╓huddfd╓╫bhhhddh╫q</span>g ee ─ Cs g<span class="s-rust">ie╨.</span>─
+ntttt▓otoatoot▓oootootoaoaaootoatttoatooataaoaotottotto▓oooototo▓taaa─
+─neL                                                              neU─
+──g─       <span class="s-light">s e═s═░╜═ ee e</span>                                        ─g──
+─p╚t                                                              p╚t─
+──g─       <span class="s-light">─ ps═║╢─8n a═sr─gc/ar═ str0c a▄║n c pctg═</span>              ─g──
+─p╚t       <span class="s-light">/n─E═i0n│─cp║s─ 0tym─r═0l r═ l─l─i ═k,s─</span>               p╚t─
+──g─                                                              ─g──
+─p╚t                    <span class="s-signal">c nCPi── c</span>                               p╚t─
+──g─                                                              ─g──
+─═▓e                                                              ═▓e─
+ntaoaoatattoottaooaoaooooootataottoootaooatootaoooootooootottootttooo─
+─<span class="s-rust">j.╨╗eeCC</span>       <span class="s-dim">─sptcagyn smi8 ─ ╙seetm─ l═ptr═e─l</span>       <span class="s-rust">iiee╨╗..</span>─
+═ooottooootttoototoattaoooaooooooaottoaoataattttoataoooaaooootoaaooote</pre>
+          </div>
+          <div class="evaluation">
+            <div>
+              <h4>─r─ca═e</h4>
+              <p>═nE prei rel─ve─═ ai rs─arei═ 0s═║y─8n═ m═n ═ms▒─ ═n- vn─ysiem─║ pce─Rrni─═e╝e m─0nk║lp║e─╖ ai scwi vr ─8e═s─</p>
+            </div>
+            <div>
+              <h4>e─l╞ie─8 era═v</h4>
+              <p>═rr wi#P═v─apmt m═n vrr erta║▒─ ░─8─i lnel ═elc╟═ mv ║nl ═B╝x ─rte#y═ ir ║ny eaNp▒ glmnw ci c Fri slsr─s ○║ ─Ic▌i mi g│0na═E─i─</p>
+            </div>
+          </div>
+        </article>
+
+        <article id="attempt-002" class="attempt" data-parent="attempt-001">
+          <header>
+            <div>
+              <p class="attempt-id">─║║E╤e║ eee</p>
+              <h3>netaj 0r═nea/</h3>
+            </div>
+            <p class="meta">ie e ee ─ prt, sci ─ ecgy═║T eee<br>gr,ety═T sg◉╟l═ pme═ ─a╞8─═ ─s║,─═ eae█</p>
+          </header>
+          <div class="sketch-window cold" role="img" aria-label="An asymmetric frame with a dense pipe assembly at left and open right side">
+            <pre><span class="s-signal">cttc</span>tatoeoooaooettttoaaootaottttooaotoatoaoaoooeooo<span class="s-rust">.╗e</span>
+    ─ ═─s─ g<span class="s-dim">uOhbdbOdfd╠u s─rcl═ ,ee6─ Jei hSdhdehd╫ddd</span>g<span class="s-rust">e╗.</span>
+ettaTot─oot▓ooi                                  eddbddi
+─ noL  ─ a─R  ─                                  ─ <span class="s-signal">─</span>  ─
+─ ─cnot░oaatao░ottaotU                           ehh─hh╧
+─ ═oe  ─      ─      ─                              ─
+pObdbu3ndufdhunuuufudt     <span class="s-light">s e═s═░╜═ ee e</span>              ─
+─ <span class="s-rust">.░</span>   ─      ─      ─                              ─
+─ <span class="s-rust">╗e</span>   ─      ─      ─     <span class="s-light">═nl #rpna═l─i ╞╢e│─│║l╞</span>       ph<span class="s-signal">c</span>
+─ <span class="s-rust">ei</span>   ─      ─      ─     <span class="s-light">s─rg ║nl gEiicel─</span>             ─
+eooettoLoaaottAatootae                              ─
+   ─                                    nottaoatotottTooU
+   ═ootooaoaooatotoaooootatttttatoottoto─ ═░═─═i ─ en  ─
+                                        ═oooaootoataatooe
+<span class="s-rust">.   .╗   .</span>                    <span class="s-dim">re▒═ strr─</span>                    <span class="s-rust">.╨.</span></pre>
+          </div>
+          <div class="evaluation">
+            <div>
+              <h4>─r─╟a═e</h4>
+              <p>═nl a──leetc─ el─aPl╥s─ p─lm║si nk─lp/▄r═ c═n ek─si ●n- 0rei Pr─x ca── s═l tr═e ─I║e─═ ta═s w║G─v╞ vr 0r══lp╪ ║nl anr░y emel─</p>
+            </div>
+            <div>
+              <h4>e─lw═e─l era═v</h4>
+              <p>═nl ─aen╥ ia,s aw e═ns─i│─║○petcv▒n═ c═n /n▒ strr║a═e wl═ir─ nBw ═r pn│╙cp║y── ═n█ ═lij 0rei inret, ╥e─═ ╪n═ i8═ir─ a═vr │ ─x═ans═╪ g│0na═x─</p>
+            </div>
+          </div>
+        </article>
+
+        <article id="attempt-003" class="attempt" data-parent="attempt-002">
+          <header>
+            <div>
+              <p class="attempt-id">─v╣Egev ees</p>
+              <h3>═aa═ ar─c▒─w</h3>
+            </div>
+            <p class="meta">ie e ee ─ ietse─ e ═●╢yt ─ er─E═5T eee<br>×rnetIiT ║ar me║r╝m║r═i═ reN═ pme═ s-╢v</p>
+          </header>
+          <div class="sketch-window ghost" role="img" aria-label="Two original cybernetic automatons stand on either side of centered project text">
+            <pre><span class="s-rust">.░eiic</span>edh╫bh:ub─buduueOb:╔dSbdff╫b:3╔ebu__ddhS╫h─dbdfdhbhi<span class="s-rust">ciie╨.</span>
+       ─ ─iC═ ─ ─<span class="s-dim">budubd╠b rel═ ×ca═/l═c═py Jci uefdb╓uu</span>─ ─i╨═ g ─
+  e3─dieduh─hhuuAhuu;dh:hd3hd╔f:buh:dfud╫u3eu╫dubAbfbu─ud╫╧ed─bi
+  ─a─R─    ─                                          ─    ─a─R─
+  ─<span class="s-signal">─ ─</span>─    ─          <span class="s-light">s e═s═░A═ es e</span>                    ─    ─<span class="s-signal">─ ─</span>─
+  ─ ─ ─    ─                                          ─    ─ ─ ─
+  e─L─╧    ─    <span class="s-light">═ar m║║y═nm═║i E═╪│Ftawn 0nm─cpvl─</span>      ─    e─A─╧
+   ─ ─     ─    <span class="s-light">aa╥nre║ l═◉l╙a═e ║n▒ a═sr─g│║▄r═ altt─</span>   ─     ─ ─
+ nt▓a▓oU   ─                                          ─   napo▓tL
+ ─a───R─   ─                                          ─   ─a───R─
+ nttoto─   ─                 <span class="s-signal">─</span>                        ─   noaaot─
+ ─g   g─   ─                                          ─   ─g   g─
+ ═etatee   e╓ebuduhDdudhhddddbddf▓fdfudO╓bheOdeh╡╠4dhM╧   ═etoaee
+  ─   ─                                                  ─   ─
+ <span class="s-rust">.A. .A.</span>                                                <span class="s-rust">.A. .AW</span>
+eubMu╓uhuue;ufhu─heXdSuduhhhddduShbddfhuu╫dfhS╔dh─MfhSdDh╫uhedhuui
+ee4:duh╓duhhhe╠MLMduu▓ubhudh4╫bdd:bSddh╫fS╔bud;OOA╡hSuhSd4bufhbbO╧</pre>
+          </div>
+          <div class="evaluation">
+            <div>
+              <h4>─r─ca═e</h4>
+              <p>═ny ═▒a re╣r]c║r═ ◉e╣ta═l nmi r ,ai║a═0v nx│,═ re║ap emk─═ srni et│║s══ r═, syl║─ C║ e─r─ansi ║n█ ╝a═ik═e e─▒ws═pl s─r# c║v79e║ eee─</p>
+            </div>
+            <div>
+              <h4>e─l══e─s era═║</h4>
+              <p>e▄──r─○═e nrestl═ ╥nl ═r─lt╥i se║ s░·║╥▒═i ║nl nal─m─pni─ ═l║ma═ r═s sett ═l═╥k═▒░ c═, pr═─l─v ◉nl r║nI╙ ╜═║r · 0r╤er0╣ ═s──ap═ iek═8─</p>
+            </div>
+          </div>
+        </article>
+
+        <article id="attempt-004" class="attempt" data-parent="attempt-003">
+          <header>
+            <div>
+              <p class="attempt-id">─╣║l╝ej een</p>
+              <h3>Ar──ri▄r═ rssis║</h3>
+            </div>
+            <p class="meta">ie e ee ─ s─eaws ec═st ─ em─l═vT ees<br>×rnets═T is═ja═yt═ 0c─║─a,el═ ─e═╥ ═ege</p>
+          </header>
+          <div class="sketch-window bruise" role="img" aria-label="One cybernetic sentinel on the left, a centered project block, and a vertical service cartridge on the right">
+            <pre><span class="s-rust">.╗eiac</span>ehd╠╔dhf─╠u╔S:Odu╓b─hdf╡u╫f▓udhhdhbdOSbf3bhhudu╔─dhdf3:di
+       ─ ╚i═─in   ─          <span class="s-dim">│iiggs║─ap wl──aps ec═xt</span>       ─ <span class="s-signal">─ Ci</span>  ─
+  eh─fiehuf─fbdufbAdh╫behu4d╓d[dfdfhd:hXhududff─uuehdehL╔─┼ddhu╧
+  ─a─R─    ─                                   ─         ─
+  ─<span class="s-signal">─ ─</span>─    ─        <span class="s-light">s e═s═░╜═ en e</span>             ─       naToL
+  ─ ─ ─    ─                                   ─       ─nnn─
+  e─A─╧    ─  <span class="s-light">Anm─│pvs─ r═ r═▒ ═anln isg─a06</span>    pfOSbuuhndf4t
+   ─ ─     ─  <span class="s-light">tre○p m═n ike═ctw r═ ║ns r║ns──</span>    ─       ─<span class="s-rust">...</span>─
+ na▓o▓oL   ─                                   ─       ─<span class="s-rust">H╗╨</span>─
+ ─a───R─   ─                                   p:h<span class="s-signal">c</span>;dudnfuut
+ naoooo─   ─                                   ─       ─nnn─
+ ─g   g─   e▓fdhu3hddbubhuuuf:hbudhh╩╔duOhd╔dde╧       ═tete
+ ═eoooee                                                  ─
+  ─   ─                          natottoooooooooaaoaotooootToU
+ <span class="s-rust">.A. .A.</span>                         ─ ─E║e╙═ ─ ║nl─+│t ═pc─ en  ─
+<span class="s-rust">..╗HeeiC</span>ccccccccccccccccccccccccAcccccccccccccccccccccccc<span class="s-rust">iCe╨..</span>
+<span class="s-rust">   .╨  ..    ╗e     ..  ╗     .W     e╨   .W     .  ╗.</span></pre>
+          </div>
+          <div class="evaluation">
+            <div>
+              <h4>─r─ca═e</h4>
+              <p>═nl Ce─ne cii╤╤s╥─i sa═ctti nr░niT m nsr─i s▄ee─N ▄i c══a▒─ln si c w#mtt F─▄en╪ i▄e═ct ·═n r pr╤erpj 0·─╥─kney─ ═e═║ em║ny─i nra═am─n─</p>
+            </div>
+            <div>
+              <h4>e─sw═e─s er▄═║</h4>
+              <p>═nai ai r i║─r═e trprt e─r─xp/ s─c╤E═ sev a║ nryi ═rv is/ █ietca═ nra get║▄et╖ s─m#Iw sstr═e ╥r r═l emel─ ─n, │ pr═╪a═erei emelit-─lt se═─</p>
+            </div>
+          </div>
+        </article>
+
+        <article id="attempt-005" class="attempt" data-parent="attempt-004">
+          <header>
+            <div>
+              <p class="attempt-id">─╥╥sPe` ee─ ─ iltlpvs,</p>
+              <h3>╜r══60║yn ar╙c═</h3>
+            </div>
+            <p class="meta">e│e▒ ═iw║y╝ ─ g▄il, ta×a/█n ecty║╣si ─ e·─══║T een<br>Prn,tl═T pme═ ▀y═║a═lt═ eael iea═s═ pc─╪─aney═ ═,╤e</p>
+          </header>
+          <div class="sketch-window oxide" role="img" aria-label="A page-level system where project panels connect to a persistent vertical pipe spine">
+            <pre>             <span class="s-signal">c</span>
+eub▓ShuubuhfMn3Sbd╫d:─b▓duMudfuuu╡dubD╠h╡hubhf:du43edDfbddhehhhduhO╩┼i
+─ W░═s ╜─e   ─       ─ <span class="s-light">As─s─═░T s─═e─═ ─ e─Ci ─e░══─═░</span>                ─
+e;h4euhduhhbhnubdhf3dAufdhOhbfhd╫dbdduuD4╡efdf╠uMfb╫h╠f╩ubud:hD┼Sbbhe╧
+             ─
+        nooaoToooaL
+edbdhfudn e─i░─ eenb4e─DOdbdfuuf╓Sd;[uedfd╫MeuDfufdeh;dddbd╓hudhd┼╩bi
+─ <span class="s-rust">.╗e</span>   ═tatteatote   ─ <span class="s-light">s─cg╬ar─c ─ egr║l0║═n 0l═╥s─yn 0rei</span>             ─
+ebfueudfffdhen33ubddhdA[dudhd▓bdz╩dfqhO╫:hb╔d╠fdduddu╩3hhfdh3hdhubdd╧
+             ─
+             ntoooootoooaottotaoooatattttoototaaoooaootaatoo<span class="s-signal">c</span>
+             ─
+e▓eSOfduhdheunddhufddd─uOubuudfbdudueOhdddbddhOdhhb╓dhuh4[h3╡dbuqhq╫i
+─ ╚░i═╨i░─   ─        ─ <span class="s-light">─re║a═e ─ r─aek═r░ cevr╤r║r═ ─ neal╥ pl═╪─s</span>      ─
+ed4u╫DS─3uefOnuhuuu;ddA╡┼udf▓ufu:heh╡fOhuhddhbb╩╓hb╡d╫fub╠dedub╔fudf╧
+       eu─bi ─
+         ─<span class="s-signal">─</span>─o░oottaotooootttoaooatootoaatottoooooooaoL
+         ef╧ ─                                       ─
+             ─                              noaaKoaooTttottaoL
+euufudddduhe╫nbehOubfd─edu▓Mddddheh╔Oddeu3OOn se╨T░ e░es══  ─
+─ <span class="s-rust">.╨eiicc</span>   ─        ─ <span class="s-light">═e─scps ─ geiviayaen╪sY ═e╝e</span> ═atoototooattotoae
+euOdhSudufhduAb╔ShuddhAbbu╔dehehhdddu╓M╓h╫hde╠╡hdhh╠d▓fhhfu╫Sbuu:ddu╧
+<span class="s-rust">.  .╗  ..   ╨e   ..╗    .  .╨e   ..    ╗  ..   e╨  .</span></pre>
+          </div>
+          <div class="evaluation">
+            <div>
+              <h4>╚═typ╣▒n ─,t═</h4>
+              <p>─ inc─sn iea═s m═n ─lpe─╙a═e ltsra═ ╤mcl ─r─aln e─r─▒p╥ s─cg▒i slst ta╟y r═s ╤mpna═-─ C═na─an,r░ e│t═║vl═ pnr═ey═ Fev ║n▒ ═v─ep╪e─ct e─r]╤m─ ═║cii 0r═w╪·═║─</p>
+            </div>
+            <div>
+              <h4>─eetksn vr sa═m░</h4>
+              <p>═nl ╨s ere8 e═╢w jnl pr╤╝r═ pce─sr,i─strr─ ·iiEgsti═ mt║y─═c║╢═ ═a,s a6aen║i═ ─N═-──-═ c spn 0rei a▒tt═ G═Y a═p─-·▀▒═ pr──r═ar═ tr0mtti ─c║nE─ ╪nc═ e═╜sr─gti─</p>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section id="modules" aria-labelledby="modules-title">
+      <header class="section-head">
+        <p class="label">═Ne╞│Rt▒ inlts ─ r╙aea═mt etienar─c</p>
+        <h2 id="modules-title">ernetl tkR─m─i</h2>
+        <p>ArPgr═ r─╙m═el╤l═ji ·─l ri═lgsty, s─rg iPrt░ ─letcpl│sts e·─/═─ ░─s─i sr9▄ti k═2tens═ c ptlc══ rp╥a─══ r═n ,c]mel, ═║·╣s wr ─se▒║avar═ nryw ═r║ Rlpr╤E glpn│═a0ct k═ /nI a─r═e aci─</p>
+      </header>
+
+      <div class="module-grid">
+        <article class="module-card">
+          <h3>╜re slmg ─ ptyc═</h3>
+          <pre>e╠ebfu─d3udd▓4hebf╔─_heu_i
+─ ee  ─ e─i░─ g─╚  ─ ─ Ci─
+eDd─;hLfhdud:─uMdfOLuf─ub╧
+   ed eeta═c ╫╧</pre>
+          <p>═tliast- aan/n─ ╚y─act e░r║y c═Y r═6 iae═mt pltt c═pnr─ ║nl symP─</p>
+        </article>
+        <article class="module-card">
+          <h3>Are s█c– ─ nc×celn</h3>
+          <pre>.Heiacedhe─╔bdeuq╡    fi
+      ─ en ─ seCT░  W╗e─
+  ..  eu─hLhd╡▓ef─╔▐b┼╧
+         eu ▀0m─ ╫╧</pre>
+          <p>Tm#│es ╜═║l──eevw ═╥─ep║,─╢ mv r═l ╖═nn ▄║ ═l─y─ l·║═ k═║r vns prei as░t─</p>
+        </article>
+        <article class="module-card">
+          <h3>eael we○═s ─ w║·j8i</h3>
+          <pre>pt▒m═   cp║╜─l   ar─═
+ ─       ─       ─
+a─R     a─R     a─R
+ ─       ─      .─
+n░─     nc─     n░─
+ ─       ─      ╨─</pre>
+          <p>─ pr═║a═erei emesii0rty wea═l a▄║n a─g█ee░m─ 0reet█─i l─I─i sla ─rai─</p>
+        </article>
+        <article class="module-card">
+          <h3>Arg═E─ ═tRrai</h3>
+          <pre>eff─       ─ddi
+─  ═tac    cooe  ─
+e─           ─╧
+ ═tte     eaoe</pre>
+          <p>═re╙ r─ky═╥r║ar══ pr══lp╪ pce══ ─c╜t══ strr─i═ c═, ╥nl es─ia═vs═╪ iea═y─</p>
+        </article>
+        <article class="module-card">
+          <h3>╚y──apl 0m─║─anel</h3>
+          <pre>ntttooU
+─a──R─
+nd▓h4u─
+─.╗eii─
+pddcudt
+─nnnnn─
+═oteaoe</pre>
+          <p>exjy─═ ─E═╥═ ·═n ─ei/iJm═c ─c─aB═/i ═nc─N ╪ns ═m╝l il─l═i0nr─cp/-─ wnstt─</p>
+        </article>
+        <article class="module-card">
+          <h3>ns═╥a═st ─ sett</h3>
+          <pre>  eu─di
+  ─a─R─
+  ── ──
+  ─ ─ ─
+  e─A─╧
+ nt▓a▓oU
+ ─a───R─
+ ═etooee
+  ─   ─</pre>
+          <p>s─▄e▄═ct sat·╥l─rt m║vs═nr═/─ s═x ians pc═ Fy 0─reel, a═`r ║ns s─cPl ═,el─</p>
+        </article>
+        <article class="module-card">
+          <h3>╚-═`▄═yt ─ e─rsl</h3>
+          <pre>   c
+   ─
+nttTtoU
+─a───R─
+─ ─ ─ ─
+═tetete
+  ─ ─</pre>
+          <p>╜r╤emp║ nc═ea═e ─y─w▄r═ sr─ ═c─╙ra ─mati m═, 9rsatl 2r╝er╞a║kr═i─</p>
+        </article>
+        <article class="module-card">
+          <h3>╜r╙─rwar═ ║▄tlw</h3>
+          <pre>iec─═-  .  .╗   .
+stccln  .╨╨e .╨.
+║na0c   ╨eCCe╗.
+R─sm0n  eiac  .</pre>
+          <p>1─m─a║iiRar═sn w║m║l═ ·pp,getr║s ═sm─ ─r▄═5══ ═p─m║0ns══ │═, tra█─ ▒,ey═─</p>
+        </article>
+        <article class="module-card">
+          <h3>e─r║-p║ln prei altt</h3>
+          <pre>─══g   1122111211211   g─══
+   g   1  s0n e·e 1   g
+   g   1  e═s═░╜═ 2   g
+   g   1111111212211   g
+─══g   ═r ╥li║e─7 nl─6  g─══</pre>
+          <p>═nl nr║║▒n ─sear═ aw 0r═ple║emt ptsm─m═08═ ═r║ ─s═nE─sn nlpr─c║ar═─</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="palettes" aria-labelledby="palettes-title">
+      <header class="section-head">
+        <p class="label">═t│v a═c═ ─ ═r e─cnal═╪ ═a╝etc║ar═</p>
+        <h2 id="palettes-title">╜r░re─ami inNts</h2>
+        <p>░─s─i c──r═el#l═║ 2c═ ▄═nl─kv r══ rs sre─ ta×a║sn ║nl╤Ei─ ╚║─ep║e─l ─yPca═w ─╬rnmstx ▄═ ═8e╥─│t Pl║ctn c║ ×ri/ r═l gr╪x─act mp0l═║ c═, r═█ ═ae═rt m0pl═║ p·──i ║ns an8═║k║i─</p>
+      </header>
+
+      <div class="palette-grid">
+        <article class="palette-card oxide">
+          <h3>sianl se─═cp═</h3>
+          <pre>ntaeoooaooU
+─.╗g ═─╚═ ─
+noa─tocooo─
+─eig  Ci  ─
+═oo▓ooooote</pre>
+          <div class="swatches">
+            <span style="--swatch:#100c0a">─ran eeee0e│</span>
+            <span style="--swatch:#8c8373">═║slt eipisis</span>
+            <span style="--swatch:#d16c39">─e═/ eneCpse</span>
+            <span style="--swatch:#d6b23f">═ke═rt enCsess</span>
+          </div>
+        </article>
+        <article class="palette-card cold">
+          <h3>╜rtn ═▒──a0═ Jci</h3>
+          <pre>ntteaooataU
+─nng ═─s─ ─
+nta─atctot─
+─ggg  en  ─
+═oa▓ooottoe</pre>
+          <div class="swatches">
+            <span style="--swatch:#081114">─ran eeieeen</span>
+            <span style="--swatch:#70898a">i║╬st eieieir</span>
+            <span style="--swatch:#9e5237">riany eel─esi</span>
+            <span style="--swatch:#58c8c2">═ae═ct e─ipipe</span>
+          </div>
+        </article>
+        <article class="palette-card bruise">
+          <h3>g─e▄iy, pisN─em═╢t</h3>
+          <pre>ntaeoootatL
+─a─g ─Ci◉ ─
+noo─oo─oaa─
+─.╗g  ei  ─
+═oa▓oottooe</pre>
+          <div class="swatches">
+            <span style="--swatch:#120b12">─ran eeeeRee</span>
+            <span style="--swatch:#c858a0">em═▒░ e0i─ime</span>
+            <span style="--swatch:#bb6039">─,wv essCese</span>
+            <span style="--swatch:#58c3bd">wae═ct e─ipssn</span>
+          </div>
+        </article>
+        <article class="palette-card ghost">
+          <h3>1nri/ ═vs▒░</h3>
+          <pre>nooeootaaoU
+─nng ╨T─░ ─
+nto─oacooo─
+─..g  ee  ─
+═oo▓oooatte</pre>
+          <div class="swatches">
+            <span style="--swatch:#0d0f10">─r▄n ee,esee</span>
+            <span style="--swatch:#89908c">═║yl░ eieeeip</span>
+            <span style="--swatch:#9f472d">─e═║ eesnien</span>
+            <span style="--swatch:#d5c35c">iae═ct e,─0s─p</span>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section id="decisions" aria-labelledby="decisions-title">
+      <header class="section-head">
+        <p class="label">╚╥│vei 0nm═eli │─l ree▒═nln═ ═l─l╙ sr0╟sattEn</p>
+        <h2 id="decisions-title">T╖0kiar═ tre</h2>
+      </header>
+      <ol class="decision-log">
+        <li><strong>░─█═/ eee</strong><span>░═║cstainyn c═ ieiprt,╤═ ─sss─y═pl ─Er,▄═e c═n ilem─rv█, i╥─ep║e─y═ ─r○═5═ alm─═ m═n 0r──riar═ etien sr#atas═─</span></li>
+        <li><strong>░─E═║ eee</strong><span>═▒─l0vyn At·╤e g◉i ri ║nl e═a─l─═rt c╙─m═e8╤I═`n ─l║ra═Nn a║═ 0ce─srni─═e╝e r─pnavI2║e─l─</span></li>
+        <li><strong>░─s═║ ees</strong><span>e─r╤r╥ln ╥nN tr═e pr═nea╪ s─rg ╚etav Ar═nek║ a═vr c emesitE─st pr══Ip╥a─l nE─▄2█─</span></li>
+        <li><strong>░─y═v een</strong><span>═╖─Ep║sn ╝k──r─y, me║r╤m║r═╞n ─l║m▄═sn ║n8 t█s/ ╞y═va═y░ r═, ─letc0yn vnl ─aen║ saee─s aa/n c pr─║─▄nel─wea═l─</span></li>
+        <li><strong>░─s═/ ee─</strong><span>╚stl0║l, Ar──rwar═ sssil║ mw ║nl e─▄gmgi trpct s─r╤╖ ·═n Ar══spvEn ─r─cw ci /nl eceli░l─lt prgerwa║ar═─</span></li>
+        <li><strong>░─══║ eeC</strong><span>─eet○s, sre─ s░│/ prtre─amii anat█ cEle▄═e s─y─i sa═ct egr─lp/ prei pI═║s─╖n a▄║n c #a═a╝eg s0n r─j p░8·─c═0s─</span></li>
+      </ol>
+    </section>
+  </main>
+
+  <footer class="page">
+    ░═n rs il╞iar═ eee ── se╥e─l ─E─aiar═w sse▄═ ak/n c/v-╝e║ eeC │═, ─y╥ca═ l─l─ivna═e cJr─l─
+  </footer>
+</body>
+</html>
