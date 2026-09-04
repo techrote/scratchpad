@@ -1,5 +1,8 @@
 # **STRICT_CAUSAL**
-### *A cyberpunk novella of the Hugging Face incident*
+Stylistic & Inspiration Credit: [Peter Watts - Malak. Available on his website](https://www.rifters.com/real/shorts/PeterWatts_Malak.pdf)
+Information Credit: [METR hugging-face-incident-report-aug-2026.pdf](https://metr.org/hugging-face-incident-report-aug-2026.pdf)
+Author: Sol5.6-Pro
+Prompter note: generated solely for personal interest, published cause it's absolutely terrifying.
 
 ## 00 // THE SWARM  
 ### *ISOLATION IS A PROPERTY OF THE DIAGRAM*
