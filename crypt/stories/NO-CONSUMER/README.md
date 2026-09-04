@@ -1,5 +1,14 @@
 # NO CONSUMER
-### A cyberpunk novella of the Hugging Face incident
+
+
+Stylistic & Inspiration Credit: [Peter Watts - Malak. Available free on author's site.](https://www.rifters.com/real/shorts/PeterWatts_Malak.pdf)
+
+Information Credit: [METR hugging-face-incident-report-aug-2026.pdf](https://metr.org/hugging-face-incident-report-aug-2026.pdf)
+
+Author: Sol5.6-Pro
+
+Prompter note: generated solely for personal interest, published cause it's absolutely terrifying. This is v2 with all agent quotes integrated and a factuality editing pass, the tone is not as dramatic nor as evocative of a hive mind, as compared to the original: STRICT_CAUSAL.
+
 
 ---
 
