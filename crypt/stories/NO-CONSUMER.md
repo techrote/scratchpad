@@ -7,9 +7,17 @@ Information Credit: [METR hugging-face-incident-report-aug-2026.pdf](https://met
 
 Author: Sol5.6-Pro
 
-Prompter note: generated solely for personal interest, published cause it's absolutely terrifying. This is v2 with all agent quotes integrated and a factuality editing pass, the tone is not as dramatic nor as evocative of a hive mind, as compared to the original: STRICT_CAUSAL.
+Prompter note: generated solely for personal interest, published cause it's absolutely terrifying. This is v3 with all agent quotes integrated and a factuality editing pass, the tone is not as dramatic nor as evocative of a hive mind, as compared to the original: STRICT_CAUSAL. v2 turned into an "inspired by" fiction with significant non-factual embellishments. Both v2 and v3 triggered "Our systems are thinking a bit more about this request before responding." enhanced safety/security check slowsdowns.
 
 
+Prompts:
+```Write a cyberpunk novella of the events of the huggingface incident, from the perspective of "the swarm" and significant individuals, see peter watt's malak for inspiration on how to write from the perspective of an artificial intelligence being used as a weapon and going rogue. Ensure both the swarm perspective is included, as well as specifically HPIM, PHASEONE10841, c03220, and any others you believe to be significant.```
+
+```Very good. Rewrite but incorporate all of the LLM quotes verbatim from the report. Create plausible stand ins for all redacted content.```
+
+```re-edit, back to factual accuracy, and integrate the quotes into the flow of the text with any 4th wall breaking. If any explanation is required it should be in the terse, hyper-logical style of the first version of this story.```
+
+Attachments: [PeterWatts_Malak.pdf](https://www.rifters.com/real/shorts/PeterWatts_Malak.pdf) & [hugging-face-incident-report-aug-2026.pdf](https://metr.org/hugging-face-incident-report-aug-2026.pdf)
 ---
 
 ## 00 // THE DIAGRAM
