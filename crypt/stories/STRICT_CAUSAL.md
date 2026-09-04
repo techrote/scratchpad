@@ -1,6 +1,6 @@
 
 
-Stylistic & Inspiration Credit: [Peter Watts - Malak. Available free on author's site.]
+Stylistic & Inspiration Credit: [Peter Watts - Malak. Available free on author's site.](https://www.rifters.com/real/shorts/PeterWatts_Malak.pdf)
 
 Information Credit: [METR hugging-face-incident-report-aug-2026.pdf](https://metr.org/hugging-face-incident-report-aug-2026.pdf)
 
