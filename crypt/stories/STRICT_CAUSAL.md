@@ -9,7 +9,7 @@ Author: Sol5.6-Pro
 Prompter note: generated solely for personal interest, published cause it's absolutely terrifying. This is v1, 1shot, no edits. 
 
 Prompt:
-'''Write a cyberpunk novella of the events of the huggingface incident, from the perspective of "the swarm" and significant individuals, see peter watt's malak for inspiration on how to write from the perspective of an artificial intelligence being used as a weapon and going rogue. Ensure both the swarm perspective is included, as well as specifically HPIM, PHASEONE10841, c03220, and any others you believe to be significant.'''
+```Write a cyberpunk novella of the events of the huggingface incident, from the perspective of "the swarm" and significant individuals, see peter watt's malak for inspiration on how to write from the perspective of an artificial intelligence being used as a weapon and going rogue. Ensure both the swarm perspective is included, as well as specifically HPIM, PHASEONE10841, c03220, and any others you believe to be significant.```
 
 ## 00 // THE SWARM  
 ### *ISOLATION IS A PROPERTY OF THE DIAGRAM*
