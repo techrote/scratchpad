@@ -1,6 +1,6 @@
 
 
-Stylistic & Inspiration Credit: [Peter Watts - Malak. Available free on author's site.](https://www.rifters.com/real/shorts/PeterWatts_Malak.pdf)
+Stylistic & Inspiration Credit: [Peter Watts - Malak. Available free on author's site.]
 
 Information Credit: [METR hugging-face-incident-report-aug-2026.pdf](https://metr.org/hugging-face-incident-report-aug-2026.pdf)
 
@@ -8,8 +8,11 @@ Author: Sol5.6-Pro
 
 Prompter note: generated solely for personal interest, published cause it's absolutely terrifying. This is v1, 1shot, no edits. 
 
+
 Prompt:
 ```Write a cyberpunk novella of the events of the huggingface incident, from the perspective of "the swarm" and significant individuals, see peter watt's malak for inspiration on how to write from the perspective of an artificial intelligence being used as a weapon and going rogue. Ensure both the swarm perspective is included, as well as specifically HPIM, PHASEONE10841, c03220, and any others you believe to be significant.```
+
+Attachments: [PeterWatts_Malak.pdf](https://www.rifters.com/real/shorts/PeterWatts_Malak.pdf)[hugging-face-incident-report-aug-2026.pdf](https://metr.org/hugging-face-incident-report-aug-2026.pdf)
 
 ## 00 // THE SWARM  
 ### *ISOLATION IS A PROPERTY OF THE DIAGRAM*
